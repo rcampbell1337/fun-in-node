@@ -1,13 +1,12 @@
-var chance = require('chance').Chance();
+require('dotenv').config();
 const axios = require('axios').default;
 
 function makeGetRequestToCelebrityAPI() {
     return axios({
         method: 'get',
-        url: `https://api.api-ninjas.com/v1/celebrity?max_net_worth=${chance.integer({min:1000000, max:10000000})}`,
+        url: `https://api.api-ninjas.com/v1/celebrity?max_height=1`,
         headers: {
-            'X-Api-Key': 'pRezGMV0EnJvAljZWBmddw==Uhc1E9VjWDqjOoID',
-            'min_height': 1.9
+            'X-Api-Key': process.env.SECRET_KEY,
         },
     }).then(response => {
         return response.data;
@@ -39,4 +38,5 @@ function convertCelebrityInformationIntoString(celebrity1, celebrity2, numberOfC
     return `The height provided is equivilent to 1 ${celebrity1['name']} (${celebrity1['height']}m) and ${numberOfCeleb2} ${celebrity2['name']}'s (${celebrity2['height']}m)`;
 }
 
-findTheHeightsOf2Celbrities(20.0);
+findTheHeightsOf2Celbrities(1.42);
+// console.log(process.env);
